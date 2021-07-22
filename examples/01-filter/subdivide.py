@@ -31,14 +31,14 @@ def plot_subdivisions(mesh, a, b):
     p = pv.Plotter(shape=(3,3))
 
     for i in range(3):
-        p.subplot(i,0)
+        p.subplots(i,0)
         p.add_mesh(mesh, **display_args)
         p.add_text("Original Mesh")
 
     def row_plot(row, subfilter):
         subs = [a, b]
         for i in range(2):
-            p.subplot(row, i+1)
+            p.subplots(row, i+1)
             p.add_mesh(mesh.subdivide(subs[i], subfilter=subfilter), **display_args)
             p.add_text(f"{subfilter} subdivision of {subs[i]}")
     row_plot(0, "linear")

@@ -219,7 +219,7 @@ p.show()
 p = pv.Plotter(shape=(2, 4))
 for i in range(2):
     for j in range(4):
-        p.subplot(i, j)
+        p.subplots(i, j)
         current_index = 4 * i + j
         vector = f"eigenmode_{current_index:02}"
         p.add_text(

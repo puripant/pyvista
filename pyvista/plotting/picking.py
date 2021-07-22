@@ -126,7 +126,7 @@ class PickingHelper:
                         mapper = actor.GetMapper()
                         if isinstance(mapper, _vtk.vtkDataSetMapper) and mapper.GetInput() == mesh:
                             loc = self_().renderers.index_to_loc(index)
-                            self_().subplot(*loc)
+                            self_().subplots(*loc)
                             break
 
                 # Use try in case selection is empty
@@ -137,7 +137,7 @@ class PickingHelper:
 
                 # Reset to the active renderer.
                 loc = self_().renderers.index_to_loc(active_renderer_index)
-                self_().subplot(*loc)
+                self_().subplots(*loc)
 
                 # render here prior to running the callback
                 self_().render()

@@ -41,7 +41,7 @@ p = pv.Plotter(shape=(1, 2))
 p.add_mesh(cyl, interpolate_before_map=False,
            scalar_bar_args={'title': 'Elevation - not interpolated'},
            **dargs)
-p.subplot(0, 1)
+p.subplots(0, 1)
 p.add_mesh(cyl, interpolate_before_map=True,
            scalar_bar_args={'title': 'Elevation - interpolated'}, **dargs)
 p.link_views()
@@ -66,7 +66,7 @@ p = pv.Plotter(shape=(1, 2))
 p.add_mesh(cyl, interpolate_before_map=False,
            scalar_bar_args={'title': 'Elevation - not interpolated'},
            **dargs)
-p.subplot(0, 1)
+p.subplots(0, 1)
 p.add_mesh(cyl, interpolate_before_map=True,
            scalar_bar_args={'title': 'Elevation - interpolated'}, **dargs)
 p.link_views()
@@ -92,7 +92,7 @@ dargs = dict(scalars='RTData', cmap='rainbow', show_edges=True)
 p = pv.Plotter(shape=(1, 2))
 p.add_mesh(wavelet, interpolate_before_map=False,
            scalar_bar_args={'title': 'RTData - not interpolated'}, **dargs)
-p.subplot(0, 1)
+p.subplots(0, 1)
 p.add_mesh(wavelet, interpolate_before_map=True,
            scalar_bar_args={'title': 'RTData - interpolated'}, **dargs)
 p.link_views()
@@ -113,7 +113,7 @@ dargs = dict(scalars='RTData', cmap='rainbow', show_edges=True, n_colors=8)
 p = pv.Plotter(shape=(1, 2))
 p.add_mesh(wavelet, interpolate_before_map=False,
            scalar_bar_args={'title': 'RTData - not interpolated'}, **dargs)
-p.subplot(0, 1)
+p.subplots(0, 1)
 p.add_mesh(wavelet, interpolate_before_map=True,
            scalar_bar_args={'title': 'RTData - interpolated'}, **dargs)
 p.link_views()

@@ -137,7 +137,7 @@ class Renderers():
                                 raise ValueError('Groups cannot overlap. Overlap '
                                                  f'found at position {(i, j)}.')
                     self.groups = np.concatenate((self.groups, np.array([norm_group], dtype=int)), axis=0)
-            # Create subplot renderers
+            # Create subplots renderers
             for row in range(shape[0]):
                 for col in range(shape[1]):
                     group = self.loc_to_group((row, col))
@@ -257,10 +257,10 @@ class Renderers():
         Parameters
         ----------
         index_row : int
-            Index of the subplot to activate along the rows.
+            Index of the subplots to activate along the rows.
 
         index_column : int
-            Index of the subplot to activate along the columns.
+            Index of the subplots to activate along the columns.
 
         """
         if len(self.shape) == 1:
@@ -416,7 +416,7 @@ class Renderers():
         """Remove the background image at the current renderer."""
         renderer = self._background_renderers[self.active_index]
         if renderer is None:
-            raise RuntimeError('No background image to remove at this subplot')
+            raise RuntimeError('No background image to remove at this subplots')
         renderer.deep_clean()
         self._background_renderers[self.active_index] = None
 

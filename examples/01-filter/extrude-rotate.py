@@ -25,7 +25,7 @@ poly
 # ~~~~~~~~~~~~~~~~~~~~~~
 
 plotter = pyvista.Plotter(shape=(2, 1))
-plotter.subplot(0, 0)
+plotter.subplots(0, 0)
 plotter.add_text("Line", font_size=24)
 plotter.add_mesh(line, color="tan", show_edges=True)
 plotter.add_mesh(
@@ -34,7 +34,7 @@ plotter.add_mesh(
     point_size=10,
     render_points_as_spheres=True,
 )
-plotter.subplot(1, 0)
+plotter.subplots(1, 0)
 plotter.add_text("Extrude Rotated Line", font_size=24)
 plotter.add_mesh(poly, color="tan", show_edges=True)
 plotter.add_mesh(

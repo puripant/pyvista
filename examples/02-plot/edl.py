@@ -34,14 +34,14 @@ nefertiti.plot(eye_dome_lighting=True, cpos=[-1, -1, 0.2], color=True)
 p = pv.Plotter(shape=(1, 2), border=False)
 
 # With eye-dome lighting
-p.subplot(0, 0)
+p.subplots(0, 0)
 p.add_mesh(nefertiti, color=True)
 p.enable_eye_dome_lighting()
 p.add_text("Eye-Dome Lighting", font_size=24)
 p.camera_position = [-1, -1, 0.2]
 
 # No eye-dome lighting
-p.subplot(0, 1)
+p.subplots(0, 1)
 p.add_mesh(nefertiti, color=True)
 p.add_text("No Eye-Dome Lighting", font_size=24)
 p.camera_position = [-1, -1, 0.2]

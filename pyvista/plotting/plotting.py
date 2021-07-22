@@ -432,7 +432,7 @@ class BasePlotter(PickingHelper, WidgetHelper):
         >>> _ = pl.add_mesh(sphere, line_width=3, style='wireframe')
         >>> _ = pl.add_text("With hidden line removal")
         >>> pl.enable_hidden_line_removal(all_renderers=False)
-        >>> pl.subplot(0, 1)
+        >>> pl.subplots(0, 1)
         >>> pl.disable_hidden_line_removal(all_renderers=False)
         >>> _ = pl.add_mesh(sphere, line_width=3, style='wireframe')
         >>> _ = pl.add_text("Without hidden line removal")
@@ -573,16 +573,16 @@ class BasePlotter(PickingHelper, WidgetHelper):
         """Store last rendered frame on close."""
         self._store_image = bool(value)
 
-    def subplot(self, index_row, index_column=None):
-        """Set the active subplot.
+    def subplots(self, index_row, index_column=None):
+        """Set the active subplots.
 
         Parameters
         ----------
         index_row : int
-            Index of the subplot to activate along the rows.
+            Index of the subplots to activate along the rows.
 
         index_column : int
-            Index of the subplot to activate along the columns.
+            Index of the subplots to activate along the columns.
 
         Examples
         --------
@@ -593,13 +593,21 @@ class BasePlotter(PickingHelper, WidgetHelper):
         >>> import pyvista
         >>> pl = pyvista.Plotter(shape=(1, 2))
         >>> actor = pl.add_mesh(pyvista.Cube())
-        >>> pl.subplot(0, 1)
+        >>> pl.subplots(0, 1)
         >>> actor = pl.add_mesh(pyvista.Sphere())
         >>> pl.set_background('orange', all_renderers=False)
         >>> pl.show()
 
         """
         self.renderers.set_active_renderer(index_row, index_column)
+
+    def subplot(self, index_row, index_column=None):
+        """Set the active subplot."""
+        warnings.warn( "Use of `Plotter.subplot` is deprecated. "
+            "Use `Plotter.subplots` instead.",
+            PyvistaDeprecationWarning
+        )
+        self.subplots(index_row, index_column)
 
     @wraps(Renderer.add_floor)
     def add_floor(self, *args, **kwargs):
@@ -3946,7 +3954,7 @@ class BasePlotter(PickingHelper, WidgetHelper):
             self.iren.add_observer('ModifiedEvent', renderer.resize)
 
     def remove_background_image(self):
-        """Remove the background image from the current subplot."""
+        """Remove the background image from the current subplots."""
         self.renderers.remove_background_image()
 
     def _on_first_render_request(self, cpos=None):
@@ -4032,7 +4040,7 @@ class BasePlotter(PickingHelper, WidgetHelper):
             renderer.remove_all_lights()
 
     def where_is(self, name):
-        """Return the subplot coordinates of a given actor.
+        """Return the subplots coordinates of a given actor.
 
         Parameters
         ----------
@@ -4042,19 +4050,19 @@ class BasePlotter(PickingHelper, WidgetHelper):
         Returns
         -------
         places : list(tuple(int))
-            A list with the subplot coordinates of the actor.
+            A list with the subplots coordinates of the actor.
 
         Examples
         --------
         >>> import pyvista as pv
         >>> plotter = pv.Plotter(shape=(2, 2))
-        >>> plotter.subplot(0, 0)
+        >>> plotter.subplots(0, 0)
         >>> _ = plotter.add_mesh(pv.Box(), name='box')
-        >>> plotter.subplot(0, 1)
+        >>> plotter.subplots(0, 1)
         >>> _ = plotter.add_mesh(pv.Sphere(), name='sphere')
-        >>> plotter.subplot(1, 0)
+        >>> plotter.subplots(1, 0)
         >>> _ = plotter.add_mesh(pv.Box(), name='box')
-        >>> plotter.subplot(1, 1)
+        >>> plotter.subplots(1, 1)
         >>> _ = plotter.add_mesh(pv.Cone(), name='cone')
         >>> plotter.where_is('box')
         [(0, 0), (1, 0)]

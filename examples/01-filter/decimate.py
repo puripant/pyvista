@@ -47,12 +47,12 @@ p.add_mesh(mesh, **dargs)
 p.add_text("Input mesh", font_size=24)
 p.camera_position = cpos
 p.reset_camera()
-p.subplot(0, 1)
+p.subplots(0, 1)
 p.add_mesh(decimated, **dargs)
 p.add_text("Decimated mesh", font_size=24)
 p.camera_position = cpos
 p.reset_camera()
-p.subplot(0, 2)
+p.subplots(0, 2)
 p.add_mesh(pro_decimated, **dargs)
 p.add_text("Pro Decimated mesh", font_size=24)
 p.camera_position = cpos

@@ -103,19 +103,19 @@ mesh.plot(scalars=scalars, cmap=['black', 'blue', 'yellow', 'grey', 'red'])
 # ``pip install colorcet``
 
 p = pv.Plotter(shape=(2, 2), border=False)
-p.subplot(0, 0)
+p.subplots(0, 0)
 p.add_mesh(mesh, scalars='Elevation', cmap="fire",
            lighting=True, scalar_bar_args={'title': "Colorcet Fire"})
 
-p.subplot(0, 1)
+p.subplots(0, 1)
 p.add_mesh(mesh, scalars='Elevation', cmap="fire",
            lighting=False, scalar_bar_args={'title': "Colorcet Fire (No Lighting)"})
 
-p.subplot(1, 0)
+p.subplots(1, 0)
 p.add_mesh(mesh, scalars='Elevation', cmap="hot",
            lighting=True, scalar_bar_args={'title': "Matplotlib Hot"})
 
-p.subplot(1, 1)
+p.subplots(1, 1)
 p.add_mesh(mesh, scalars='Elevation', cmap="hot",
            lighting=False, scalar_bar_args={'title': "Matplotlib Hot (No Lighting)"})
 

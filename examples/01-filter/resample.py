@@ -54,7 +54,7 @@ dargs = dict(clim=data_to_probe.get_data_range(), cmap='rainbow')
 
 p = pv.Plotter(shape=(1,2))
 p.add_mesh(threshold(data_to_probe), **dargs)
-p.subplot(0,1)
+p.subplots(0,1)
 p.add_mesh(threshold(result), **dargs)
 p.link_views()
 p.view_isometric()

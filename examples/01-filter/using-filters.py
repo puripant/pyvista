@@ -66,17 +66,17 @@ p.add_mesh(outline, color="k")
 p.add_mesh(threshed, show_scalar_bar=False)
 p.camera_position = [-2, 5, 3]
 # Show the contour
-p.subplot(0, 1)
+p.subplots(0, 1)
 p.add_mesh(outline, color="k")
 p.add_mesh(contours, show_scalar_bar=False)
 p.camera_position = [-2, 5, 3]
 # Show the slices
-p.subplot(1, 0)
+p.subplots(1, 0)
 p.add_mesh(outline, color="k")
 p.add_mesh(slices, show_scalar_bar=False)
 p.camera_position = [-2, 5, 3]
 # Show the glyphs
-p.subplot(1, 1)
+p.subplots(1, 1)
 p.add_mesh(outline, color="k")
 p.add_mesh(glyphs, show_scalar_bar=False)
 p.camera_position = [-2, 5, 3]

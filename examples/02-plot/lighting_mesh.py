@@ -33,11 +33,11 @@ mesh.plot(lighting=False, cpos=cpos, show_scalar_bar=False)
 # Demonstration of the specular property
 p = pv.Plotter(shape=(1,2), window_size=[1500, 500])
 
-p.subplot(0,0)
+p.subplots(0,0)
 p.add_mesh(mesh, show_scalar_bar=False)
 p.add_text('No Specular')
 
-p.subplot(0,1)
+p.subplots(0,1)
 s = 1.0
 p.add_mesh(mesh, specular=s, show_scalar_bar=False)
 p.add_text(f'Specular of {s}')

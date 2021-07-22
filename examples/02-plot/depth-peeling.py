@@ -33,7 +33,7 @@ p.add_mesh(spheres, **dargs)
 p.enable_depth_peeling(10)
 p.add_text("Depth Peeling")
 
-p.subplot(0, 1)
+p.subplots(0, 1)
 p.add_text("Standard")
 p.add_mesh(spheres.copy(), **dargs)
 
@@ -57,7 +57,7 @@ p.enable_depth_peeling(number_of_peels=4, occlusion_ratio=0)
 p.add_mesh(room, opacity=0.5, color="tan")
 p.add_text("Depth Peeling")
 
-p.subplot(0,1)
+p.subplots(0,1)
 p.add_text("Standard")
 p.add_mesh(room.copy(), opacity=0.5, color="tan")
 
@@ -82,7 +82,7 @@ p.add_mesh(mesh, opacity=0.5, cmap=cmap)
 p.enable_depth_peeling(10)
 p.add_text("Depth Peeling")
 
-p.subplot(0,1)
+p.subplots(0,1)
 p.add_text("Standard")
 p.add_mesh(mesh.copy(), opacity=0.5, cmap=cmap)
 

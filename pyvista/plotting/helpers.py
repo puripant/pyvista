@@ -288,7 +288,7 @@ def plot_compare_four(data_a, data_b, data_c, data_d, disply_kwargs=None,
 
     for i in range(2):
         for j in range(2):
-            pl.subplot(i, j)
+            pl.subplots(i, j)
             pl.add_mesh(datasets[i][j], **disply_kwargs)
             pl.add_text(labels[i][j])
             if is_pyvista_dataset(outline):

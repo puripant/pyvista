@@ -18,10 +18,10 @@ sphere = examples.load_sphere_vectors()
 warped = sphere.warp_by_vector()
 
 p = pv.Plotter(shape=(1, 2))
-p.subplot(0, 0)
+p.subplots(0, 0)
 p.add_text("Before warp")
 p.add_mesh(sphere, color='white')
-p.subplot(0, 1)
+p.subplots(0, 1)
 p.add_text("After warp")
 p.add_mesh(warped, color='white')
 p.show()
@@ -36,7 +36,7 @@ p = pv.Plotter(shape=(2, 2))
 for i in range(2):
     for j in range(2):
         idx = 2 * i + j
-        p.subplot(i, j)
+        p.subplots(i, j)
         p.add_mesh(sphere.warp_by_vector(factor=warp_factors[idx]))
         p.add_text(f'factor={warp_factors[idx]}')
 p.show()

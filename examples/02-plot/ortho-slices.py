@@ -35,24 +35,24 @@ p.show(cpos=cpos)
 
 p = pv.Plotter(shape=(2,2))
 # XYZ - show 3D scene first
-p.subplot(1,1)
+p.subplots(1,1)
 p.add_mesh(slices, **dargs)
 p.show_grid()
 p.camera_position = cpos
 # XY
-p.subplot(0,0)
+p.subplots(0,0)
 p.add_mesh(slices, **dargs)
 p.show_grid()
 p.camera_position = 'xy'
 p.enable_parallel_projection()
 # ZY
-p.subplot(0,1)
+p.subplots(0,1)
 p.add_mesh(slices, **dargs)
 p.show_grid()
 p.camera_position = 'zy'
 p.enable_parallel_projection()
 # XZ
-p.subplot(1,0)
+p.subplots(1,0)
 p.add_mesh(slices, **dargs)
 p.show_grid()
 p.camera_position = 'xz'

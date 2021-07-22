@@ -22,6 +22,7 @@ from pyvista import examples
 from pyvista.plotting import system_supports_plotting
 from pyvista.plotting.plotting import SUPPORTED_FORMATS
 from pyvista.core.errors import DeprecationError
+from pyvista.utilities.misc import PyvistaDeprecationWarning
 
 
 # skip all tests if unable to render
@@ -368,12 +369,12 @@ def test_lighting_subplots(sphere):
     for renderer in renderers:
         assert not renderer.lights
 
-    plotter.subplot(0)
+    plotter.subplots(0)
     plotter.add_light(light, only_active=True)
     assert renderers[0].lights and not renderers[1].lights
     plotter.add_light(light, only_active=False)
     assert renderers[0].lights and renderers[1].lights
-    plotter.subplot(1)
+    plotter.subplots(1)
     plotter.add_mesh(pyvista.Sphere())
     plotter.remove_all_lights(only_active=True)
     assert renderers[0].lights and not renderers[1].lights
@@ -805,7 +806,7 @@ def test_set_background():
     plotter.show()
 
     plotter = pyvista.Plotter(shape=(1, 2))
-    plotter.subplot(0, 1)
+    plotter.subplots(0, 1)
     plotter.set_background('orange', all_renderers=False)
     assert plotter.renderers[0].GetBackground() != pyvista.parse_color('orange')
     assert plotter.renderers[1].GetBackground() == pyvista.parse_color('orange')
@@ -1084,13 +1085,13 @@ def test_vector_array():
     data = setup_multicomponent_data()
 
     p = pyvista.Plotter(shape=(2, 2))
-    p.subplot(0, 0)
+    p.subplots(0, 0)
     p.add_mesh(data, scalars="vector_values_points", show_scalar_bar=False)
-    p.subplot(0, 1)
+    p.subplots(0, 1)
     p.add_mesh(data.copy(), scalars="vector_values_points", component=0)
-    p.subplot(1, 0)
+    p.subplots(1, 0)
     p.add_mesh(data.copy(), scalars="vector_values_points", component=1)
-    p.subplot(1, 1)
+    p.subplots(1, 1)
     p.add_mesh(data.copy(), scalars="vector_values_points", component=2)
     p.link_views()
     p.show()
@@ -1179,21 +1180,21 @@ def test_camera(sphere):
 def test_multi_renderers():
     plotter = pyvista.Plotter(shape=(2, 2))
 
-    plotter.subplot(0, 0)
+    plotter.subplots(0, 0)
     plotter.add_text('Render Window 0', font_size=30)
     sphere = pyvista.Sphere()
     plotter.add_mesh(sphere, scalars=sphere.points[:, 2], show_scalar_bar=False)
     plotter.add_scalar_bar('Z', vertical=True)
 
-    plotter.subplot(0, 1)
+    plotter.subplots(0, 1)
     plotter.add_text('Render Window 1', font_size=30)
     plotter.add_mesh(pyvista.Cube(), show_edges=True)
 
-    plotter.subplot(1, 0)
+    plotter.subplots(1, 0)
     plotter.add_text('Render Window 2', font_size=30)
     plotter.add_mesh(pyvista.Arrow(), color='y', show_edges=True)
 
-    plotter.subplot(1, 1)
+    plotter.subplots(1, 1)
     plotter.add_text('Render Window 3', position=(0., 0.),
                      font_size=30, viewport=True)
     plotter.add_mesh(pyvista.Cone(), color='g', show_edges=True,
@@ -1205,27 +1206,27 @@ def test_multi_renderers():
     plotter.show(before_close_callback=verify_cache_image)
 
 
-def test_multi_renderers_subplot_ind_2x1():
+def test_multi_renderers_subplots_ind_2x1():
 
-    # Test subplot indices (2 rows by 1 column)
+    # Test subplots indices (2 rows by 1 column)
     plotter = pyvista.Plotter(shape=(2, 1))
     # First row
-    plotter.subplot(0,0)
+    plotter.subplots(0,0)
     plotter.add_mesh(pyvista.Sphere())
     # Second row
-    plotter.subplot(1,0)
+    plotter.subplots(1,0)
     plotter.add_mesh(pyvista.Cube())
     plotter.show(before_close_callback=verify_cache_image)
 
 
-def test_multi_renderers_subplot_ind_1x2():
-    # Test subplot indices (1 row by 2 columns)
+def test_multi_renderers_subplots_ind_1x2():
+    # Test subplots indices (1 row by 2 columns)
     plotter = pyvista.Plotter(shape=(1, 2))
     # First column
-    plotter.subplot(0, 0)
+    plotter.subplots(0, 0)
     plotter.add_mesh(pyvista.Sphere())
     # Second column
-    plotter.subplot(0, 1)
+    plotter.subplots(0, 1)
     plotter.add_mesh(pyvista.Cube())
     plotter.show(before_close_callback=verify_cache_image)
 
@@ -1233,76 +1234,76 @@ def test_multi_renderers_bad_indices():
     with pytest.raises(IndexError):
         # Test bad indices
         plotter = pyvista.Plotter(shape=(1, 2))
-        plotter.subplot(0, 0)
+        plotter.subplots(0, 0)
         plotter.add_mesh(pyvista.Sphere())
-        plotter.subplot(1, 0)
+        plotter.subplots(1, 0)
         plotter.add_mesh(pyvista.Cube())
         plotter.show()
 
 
-def test_multi_renderers_subplot_ind_3x1():
-    # Test subplot 3 on left, 1 on right
+def test_multi_renderers_subplots_ind_3x1():
+    # Test subplots 3 on left, 1 on right
     plotter = pyvista.Plotter(shape='3|1')
     # First column
-    plotter.subplot(0)
+    plotter.subplots(0)
     plotter.add_mesh(pyvista.Sphere())
-    plotter.subplot(1)
+    plotter.subplots(1)
     plotter.add_mesh(pyvista.Cube())
-    plotter.subplot(2)
+    plotter.subplots(2)
     plotter.add_mesh(pyvista.Cylinder())
-    plotter.subplot(3)
+    plotter.subplots(3)
     plotter.add_mesh(pyvista.Cone())
     plotter.show(before_close_callback=verify_cache_image)
 
 
-def test_multi_renderers_subplot_ind_3x1_splitting_pos():
-    # Test subplot 3 on top, 1 on bottom
+def test_multi_renderers_subplots_ind_3x1_splitting_pos():
+    # Test subplots 3 on top, 1 on bottom
     plotter = pyvista.Plotter(shape='3/1', splitting_position=0.5)
     # First column
-    plotter.subplot(0)
+    plotter.subplots(0)
     plotter.add_mesh(pyvista.Sphere())
-    plotter.subplot(1)
+    plotter.subplots(1)
     plotter.add_mesh(pyvista.Cube())
-    plotter.subplot(2)
+    plotter.subplots(2)
     plotter.add_mesh(pyvista.Cylinder())
-    plotter.subplot(3)
+    plotter.subplots(3)
     plotter.add_mesh(pyvista.Cone())
     plotter.show(before_close_callback=verify_cache_image)
 
 
-def test_multi_renderers_subplot_ind_1x3():
-    # Test subplot 3 on bottom, 1 on top
+def test_multi_renderers_subplots_ind_1x3():
+    # Test subplots 3 on bottom, 1 on top
     plotter = pyvista.Plotter(shape='1|3')
     # First column
-    plotter.subplot(0)
+    plotter.subplots(0)
     plotter.add_mesh(pyvista.Sphere())
-    plotter.subplot(1)
+    plotter.subplots(1)
     plotter.add_mesh(pyvista.Cube())
-    plotter.subplot(2)
+    plotter.subplots(2)
     plotter.add_mesh(pyvista.Cylinder())
-    plotter.subplot(3)
+    plotter.subplots(3)
     plotter.add_mesh(pyvista.Cone())
     plotter.show(before_close_callback=verify_cache_image)
 
 
-def test_subplot_groups():
+def test_subplots_groups():
     plotter = pyvista.Plotter(shape=(3, 3), groups=[(1, [1, 2]), (np.s_[:], 0)])
-    plotter.subplot(0, 0)
+    plotter.subplots(0, 0)
     plotter.add_mesh(pyvista.Sphere())
-    plotter.subplot(0, 1)
+    plotter.subplots(0, 1)
     plotter.add_mesh(pyvista.Cube())
-    plotter.subplot(0, 2)
+    plotter.subplots(0, 2)
     plotter.add_mesh(pyvista.Arrow())
-    plotter.subplot(1, 1)
+    plotter.subplots(1, 1)
     plotter.add_mesh(pyvista.Cylinder())
-    plotter.subplot(2, 1)
+    plotter.subplots(2, 1)
     plotter.add_mesh(pyvista.Cone())
-    plotter.subplot(2, 2)
+    plotter.subplots(2, 2)
     plotter.add_mesh(pyvista.Box())
     plotter.show(before_close_callback=verify_cache_image)
 
 
-def test_subplot_groups_fail():
+def test_subplots_groups_fail():
     # Test group overlap
     with pytest.raises(ValueError):
         # Partial overlap
@@ -1318,13 +1319,13 @@ def test_subplot_groups_fail():
 @skip_windows_dev_whl
 def test_link_views(sphere):
     plotter = pyvista.Plotter(shape=(1, 4))
-    plotter.subplot(0, 0)
+    plotter.subplots(0, 0)
     plotter.add_mesh(sphere, smooth_shading=False, show_edges=False)
-    plotter.subplot(0, 1)
+    plotter.subplots(0, 1)
     plotter.add_mesh(sphere, smooth_shading=True, show_edges=False)
-    plotter.subplot(0, 2)
+    plotter.subplots(0, 2)
     plotter.add_mesh(sphere, smooth_shading=False, show_edges=True)
-    plotter.subplot(0, 3)
+    plotter.subplots(0, 3)
     plotter.add_mesh(sphere, smooth_shading=True, show_edges=True)
     with pytest.raises(TypeError):
         plotter.link_views(views='foo')
@@ -1345,22 +1346,22 @@ def test_orthographic_slicer(uniform):
     # Orthographic Slicer
     p = pyvista.Plotter(shape=(2, 2))
 
-    p.subplot(1, 1)
+    p.subplots(1, 1)
     p.add_mesh(slices, clim=uniform.get_data_range())
     p.add_axes()
     p.enable()
 
-    p.subplot(0, 0)
+    p.subplots(0, 0)
     p.add_mesh(slices['XY'])
     p.view_xy()
     p.disable()
 
-    p.subplot(0, 1)
+    p.subplots(0, 1)
     p.add_mesh(slices['XZ'])
     p.view_xz(negative=True)
     p.disable()
 
-    p.subplot(1, 0)
+    p.subplots(1, 0)
     p.add_mesh(slices['YZ'])
     p.view_yz()
     p.disable()
@@ -1683,7 +1684,7 @@ def test_add_background_image_subplots(airplane):
     pl = pyvista.Plotter(shape=(2, 2))
     pl.add_background_image(examples.mapfile, scale=1, as_global=False)
     pl.add_mesh(airplane)
-    pl.subplot(1, 1)
+    pl.subplots(1, 1)
     pl.add_background_image(examples.mapfile, scale=1, as_global=False)
     pl.add_mesh(airplane)
     pl.remove_background_image()
@@ -1794,13 +1795,13 @@ def test_interactive_update():
 
 def test_where_is():
     plotter = pyvista.Plotter(shape=(2, 2))
-    plotter.subplot(0, 0)
+    plotter.subplots(0, 0)
     plotter.add_mesh(pyvista.Box(), name='box')
-    plotter.subplot(0, 1)
+    plotter.subplots(0, 1)
     plotter.add_mesh(pyvista.Sphere(), name='sphere')
-    plotter.subplot(1, 0)
+    plotter.subplots(1, 0)
     plotter.add_mesh(pyvista.Box(), name='box')
-    plotter.subplot(1, 1)
+    plotter.subplots(1, 1)
     plotter.add_mesh(pyvista.Cone(), name='cone')
     places = plotter.where_is('box')
     assert isinstance(places, list)
@@ -1953,3 +1954,9 @@ def test_scalar_cell_priorities():
                      rgb=True,
                      preference='cell')
     plotter.show(before_close_callback=verify_cache_image)
+
+
+def test_subplot():
+    with pytest.warns(PyvistaDeprecationWarning):
+        plotter = pyvista.Plotter()
+        plotter.subplot(0, 0)
