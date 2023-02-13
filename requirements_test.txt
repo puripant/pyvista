@@ -26,4 +26,4 @@ pytest<7.2.0
 pythreejs<2.5.0
 sphinx-gallery<0.12.0
 tqdm<4.65.0
-trimesh<3.16.0
+trimesh<3.20.0
